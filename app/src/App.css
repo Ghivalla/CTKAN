@@ -1,7 +1,16 @@
+body {
+  background-color: #e9f5f8;
+}
 .App {
   text-align: center;
 }
-
+.Signin {
+  background-color: #2d7d9a;
+  color: #ffffff;
+}
+.Signin_h1 {
+  color: #2d7d9a;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
