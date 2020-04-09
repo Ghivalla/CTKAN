@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import Login from "./Login.js";
-import Inscriptions from "./Inscriptions";
+import Login from "./pages/login/login-page";
+import Inscription from './pages/inscription/Inscription-page';
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <section className="App">
-        <Inscriptions />
+        <Inscription />
       </section>
     );
   }

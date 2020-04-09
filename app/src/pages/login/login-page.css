@@ -1,0 +1,19 @@
+.logo {
+    width: 100%;
+    max-width: 200px;
+    margin: 35px auto;
+}
+img {
+    width: 100%;
+}
+button{
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+.btn-secondary {
+    background: url('../../assets/google-icon.svg') transparent 25px 50% no-repeat;
+}
+.link {
+    text-align: center;
+    color: #2D7D9A;
+}

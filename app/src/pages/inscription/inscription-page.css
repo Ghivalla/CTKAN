@@ -1,0 +1,12 @@
+.logo {
+    width: 100%;
+    max-width: 200px;
+    margin: 35px auto;
+}
+img {
+    width: 100%;
+}
+button{
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
