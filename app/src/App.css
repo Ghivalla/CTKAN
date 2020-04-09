@@ -1,47 +1,37 @@
 body {
-  background-color: #e9f5f8;
+  background-color: #E9F5F8;
+  box-sizing: border-box;
+  padding: 0 20px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
-.App {
+.hidden {
+  display: none;
+}
+button, input[type='submit'] {
   text-align: center;
+  height: 50px;
+  border: none;
+  width: 100%;
+  max-width: 500px;
 }
-.Signin {
-  background-color: #2d7d9a;
-  color: #ffffff;
-}
-.Signin_h1 {
-  color: #2d7d9a;
-}
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+button:hover, .link:hover {
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.btn-primary {
+  background-color: #2D7D9A;
   color: white;
-}
+  border-radius: 4px;
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid #BDBDBD;
+}
+.btn-tertiary {
+  background-color: #2D7D9A;
+  color: white;
 }
