@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Router } from "@reach/router"
 import "./App.css";
 import Login from "./pages/login/login-page";
 import Inscription from './pages/inscription/Inscription-page';
@@ -24,10 +25,11 @@ class App extends Component {
 
   render() {
     return (
-      <section className="App">
-        <Inscription />
-      </section>
-    );
+      <Router>
+        <Login path="/"/>
+        <Inscription path="/inscription"/>
+      </Router>
+    )
   }
 }
 
