@@ -13,7 +13,8 @@ button{
 .btn-secondary {
     background: url('../../assets/google-icon.svg') transparent 25px 50% no-repeat;
 }
-.link {
+p {
     text-align: center;
     color: #2D7D9A;
+    text-decoration: none;
 }

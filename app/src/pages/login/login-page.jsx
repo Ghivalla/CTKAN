@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "@reach/router"
 import FormInput from "../../components/form-input/form-input-component.jsx";
 import "./login-page.css";
 import Logo from "../../assets/logo-home-Page.svg";
 
+// eslint-disable-next-line
 const EMAIL_REGEXP = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 class Login extends Component {
@@ -59,7 +61,7 @@ class Login extends Component {
         <button className="btn-secondary">
           Se connecter avec Google
         </button>
-        <p className="link">Tu n'as pas de compte ?</p>
+        <Link to="inscription"><p className="register-link">Tu n'as pas de compte ?</p></Link>
       </section>
     );
   }
