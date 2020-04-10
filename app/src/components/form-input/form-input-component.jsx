@@ -10,10 +10,10 @@ export default function ({ label, handleChange, value, error, ...otherProps}) {
                 <input
                     {...otherProps}
                     value={value}
-                    onFocus={()=>setFocused(true)}
-                    onBlur={()=>setFocused(false)}
-                    onChange={handleChange}
-                    id={label}
+                    onFocus={ ()=> setFocused(true) }
+                    onBlur={ ()=> setFocused(false) }
+                    onChange={ handleChange }
+                    id={ label }
                 />
             </div>
             <p className="input-error">{error}</p>

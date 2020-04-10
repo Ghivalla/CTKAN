@@ -3,6 +3,7 @@ import "./inscription-page.css";
 import FormInput from "../../components/form-input/form-input-component.jsx";
 import Logo from "../../assets/logo-home-Page.svg";
 
+// eslint-disable-next-line
 const EMAIL_REGEXP = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 class Inscriptions extends Component {
