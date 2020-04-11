@@ -52,14 +52,14 @@ class Inscriptions extends Component {
 		method : 'POST',
 		headers : { 'Content-Type' : 'application/json' },
 		body: JSON.stringify({
-                	email : this.state.email,
-                	password : this.state.password
+      email : this.state.email,
+      password : this.state.password
 		})
         }).then(response => response.json()).then(user=>{
 		console.log(user);
 	})
     }else{
-      console.log('epic fail');
+      console.log('unable to register');
     }
   };
 
