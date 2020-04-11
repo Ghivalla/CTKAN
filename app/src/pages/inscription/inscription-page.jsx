@@ -48,7 +48,7 @@ class Inscriptions extends Component {
     event.preventDefault();
     const isValid = this.validate();
     if (isValid) {
-	fetch('https://www.ctkan.com/api/register', {
+	fetch('https://api.ctkan.com/register', {
 		method : 'POST',
 		headers : { 'Content-Type' : 'application/json' },
 		body: JSON.stringify({
