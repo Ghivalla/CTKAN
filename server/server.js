@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require("express");
 const bcrypt = require('bcrypt');
 const cors = require('cors');
@@ -7,16 +6,17 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const morgan = require('morgan');
+require('dotenv').config({path:'./.env'});
 
 const saltRounds = 10;
-
 const db = knex({
     client: 'pg',
     connection: {
-        host: process.env.HOST,
+    host: process.env.HOST,
         user: process.env.DB_USER,
-	password: process.env.DB_PW,
+        password: process.env.DB_PW,
         database: process.env.DB_NAME
+
     }
 });
 

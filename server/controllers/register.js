@@ -1,8 +1,6 @@
 const handleRegister = (req, res, db, bcrypt, saltRounds) => {
     const { email, name, password } = req.body;
-
     if(!email, !name, !password) {
-        console.log('nop')
        return res.status(400).json('unable to register')
     }
     const hash = bcrypt.hashSync(password,saltRounds);
