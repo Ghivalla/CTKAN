@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Router } from "@reach/router"
+import { Router } from "@reach/router";
 import "./App.css";
 import Login from "./pages/login/login-page";
-import Inscription from './pages/inscription/inscription-page';
+import Inscription from "./pages/inscription/inscription-page";
+import Scan from "./pages/scan/scan-page";
+import Ajouter from "./pages/ajouter/ajouter-page";
 
 class App extends Component {
   constructor(props) {
@@ -26,10 +28,12 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Login path="/"/>
-        <Inscription path="/inscription"/>
+        <Login path="/" />
+        <Inscription path="/inscription" />
+        <Scan path="/scan" />
+        <Ajouter path="/ajouter" />
       </Router>
-    )
+    );
   }
 }
 

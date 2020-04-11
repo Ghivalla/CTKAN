@@ -1,0 +1,69 @@
+.wrapper {
+  background-color: #e9f5f8;
+  height: 100%;
+}
+
+.scan_window {
+  background-color: blueviolet;
+  height: 360px;
+}
+.search_container {
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.search {
+  height: 40px;
+}
+
+.footer_menu_icons {
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+  padding: 0 auto;
+  justify-content: space-around;
+  background-color: #e9f5f8;
+  align-items: center;
+}
+
+.footer_scan_logo {
+  width: 24%;
+  float: left;
+}
+.footer_trousse_logo {
+  width: 22%;
+  float: left;
+}
+.footer_blog_logo {
+  width: 22%;
+  float: left;
+}
+.footer_params_logo {
+  width: 22%;
+  outline-color: 10px red;
+  float: left;
+}
+
+.products_category_peremption {
+  height: 380px;
+  font-size: 11px;
+  color: #e6720c;
+}
+.icons_category {
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+  padding: 0 auto;
+  justify-content: space-around;
+  background-color: #e9f5f8;
+  align-items: center;
+}
+.btn-primary {
+  background-color: #2d7d9a;
+  color: white;
+  border-radius: 4px;
+}
+.peremption-elements {
+  justify-content: space-between;
+}
