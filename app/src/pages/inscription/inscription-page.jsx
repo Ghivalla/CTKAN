@@ -48,7 +48,16 @@ class Inscriptions extends Component {
     event.preventDefault();
     const isValid = this.validate();
     if (isValid) {
-      console.log(`POST : { mail : ${this.state.email}}, password : ${this.state.password}}`);
+	fetch('https://www.ctkan.com/api/register', {
+		method : 'POST',
+		headers : { 'Content-Type' : 'application/json' },
+		body: JSON.stringify({
+                	email : this.state.email,
+                	password : this.state.password
+		})
+        }).then(response => response.json()).then(user=>{
+		console.log(user);
+	})
     }else{
       console.log('epic fail');
     }

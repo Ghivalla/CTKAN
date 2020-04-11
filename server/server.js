@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bcrypt = require('bcrypt');
 const cors = require('cors');
@@ -6,7 +7,6 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const morgan = require('morgan');
-require('dotenv').config();
 
 const saltRounds = 10;
 
@@ -15,7 +15,7 @@ const db = knex({
     connection: {
         host: process.env.HOST,
         user: process.env.DB_USER,
-        password: process.env.DB_PASS,
+	password: process.env.DB_PW,
         database: process.env.DB_NAME
     }
 });
@@ -29,6 +29,7 @@ app.get('/profile/:id', (req,res) => { profile.handleProfileGet(req, res, db) })
 app.post('/signin', (req,res) => { signin.handleSignin(req, res, db, bcrypt) });
 app.post('/register', (req,res) => { register.handleRegister(req, res, db, bcrypt, saltRounds) });
 
-app.listen(1234, ()=>{
-    console.log('running at port: 1234')
-})
+app.listen(3001, ()=>{
+    console.log('running at port: 3001');
+});
+

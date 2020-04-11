@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Router } from "@reach/router"
 import "./App.css";
 import Login from "./pages/login/login-page";
-import Inscription from './pages/inscription/Inscription-page';
+import Inscription from './pages/inscription/inscription-page';
 
 class App extends Component {
   constructor(props) {
