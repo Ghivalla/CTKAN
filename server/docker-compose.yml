@@ -8,8 +8,6 @@ services:
         command: npm start
         environment:
             POSTGRES_URI: postgres://db-ctkan:secret@postgres:5432/CTKAN
-        links:
-            - postgres
         ports:
             - "3001:3001"
         volumes: #allow acces to file system
