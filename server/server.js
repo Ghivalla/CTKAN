@@ -11,13 +11,7 @@ require('dotenv').config({path:'./.env'});
 const saltRounds = 10;
 const db = knex({
     client: 'pg',
-    connection: {
-    host: process.env.HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PW,
-        database: process.env.DB_NAME
-
-    }
+    connection: process.env.POSTGRES_URI
 });
 
 const app = express();
