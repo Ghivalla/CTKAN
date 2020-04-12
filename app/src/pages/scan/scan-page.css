@@ -4,45 +4,15 @@
 }
 
 .scan_window {
-  background-color:#ffffff;
+  background-color: #ffffff;
   height: 360px;
 }
-.search_container{
-height:70px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-}
-.search{
-    height:40px;
-    
-}
-
-
-.footer_menu_icons {
-  height: 100px;
-  overflow: hidden;
+.search_container {
+  height: 70px;
   display: flex;
-  padding: 0 auto;
-  justify-content: space-around;
-  background-color: #e9f5f8;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
-
-.footer_scan_logo {
-  width: 24%;
-  float: left;
-}
-.footer_trousse_logo {
-  width: 22%;
-  float: left;
-}
-.footer_blog_logo {
-  width: 22%;
-  float: left;
-}
-.footer_params_logo {
-  width: 22%;
-  outline-color: 10px red;
-  float: left;
+.search {
+  height: 40px;
 }

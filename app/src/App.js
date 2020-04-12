@@ -5,6 +5,10 @@ import Login from "./pages/login/login-page";
 import Inscription from "./pages/inscription/inscription-page";
 import Scan from "./pages/scan/scan-page";
 import Ajouter from "./pages/ajouter/ajouter-page";
+import Trousse from "./pages/trousse/trousse-page";
+import Blog from "./pages/blog/blog-page";
+import Params from "./pages/params/params-page";
+
 
 class App extends Component {
   constructor(props) {
@@ -32,6 +36,9 @@ class App extends Component {
         <Inscription path="/inscription" />
         <Scan path="/scan" />
         <Ajouter path="/ajouter" />
+        <Trousse path="/trousse" />
+        <Blog path="/blog" />
+        <Params path="/params" />
       </Router>
     );
   }

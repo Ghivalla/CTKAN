@@ -59,6 +59,21 @@
   background-color: #e9f5f8;
   align-items: center;
 }
+
+.icons_category div {
+  border: 1px solid #cfe8f1;
+  border-radius: 5px;
+  height: 90px;
+  width: 90px;
+}
+.icons_category div img {
+  height: 50px;
+  width: 50px;
+  margin: 20px;
+}
+.active-icon {
+  background-color: #fff;
+}
 .btn-primary {
   background-color: #2d7d9a;
   color: white;
