@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+    ctkan-api:
+        container_name: ctkan-server
+        working_dir: /usr/src/ctkan/server
+        build: ./
+        command: npm start
+        environment:
+            POSTGRES_URI: postgres://db-ctkan:secret@postgres:5432/CTKAN
+        links:
+            - postgres
+        ports:
+            - "3000:3000"
+        volumes: #allow acces to file system
+            - ./:/usr/src/ctkan/server
+
+    postgres:
+        environment:
+            POSTGRES_USER: db-ctkan
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: CTKAN
+            POSTGRES_HOST: postgres
+        build: ./postgres
+        ports:
+            - "5432:5432"

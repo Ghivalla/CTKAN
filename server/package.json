@@ -4,6 +4,7 @@
   "description": "server for the CTKAN app",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ghivalla",
@@ -15,6 +16,7 @@
     "express": "^4.17.1",
     "knex": "^0.20.13",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.3",
     "pg": "^8.0.2"
   }
 }
