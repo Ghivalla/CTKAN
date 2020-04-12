@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
-import FormInput from "../../components/form-input/form-input-component.jsx";
-import Logo from "../../assets/logo-home-Page.svg";
 import "./blog-page.css";
 import Footer from "../../components/footer/footer-component";
 

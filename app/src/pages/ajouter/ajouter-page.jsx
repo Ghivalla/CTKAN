@@ -33,22 +33,22 @@ class Ajouter extends React.Component {
 
             <div className="icons_category">
               <div
-                className={this.state.activeCategory == 1 ? "active-icon" : ""}
+                className={this.state.activeCategory === 1 ? "active-icon" : ""}
                 onClick={() => this.setState({ activeCategory: 1 })}
               >
-                <img src={cat1_Icon}></img>
+                <img src={cat1_Icon} alt=""></img>
               </div>
               <div
-                className={this.state.activeCategory == 2 ? "active-icon" : ""}
+                className={this.state.activeCategory === 2 ? "active-icon" : ""}
                 onClick={() => this.setState({ activeCategory: 2 })}
               >
-                <img src={cat2_Icon}></img>
+                <img src={cat2_Icon} alt=""></img>
               </div>
               <div
-                className={this.state.activeCategory == 3 ? "active-icon" : ""}
+                className={this.state.activeCategory === 3 ? "active-icon" : ""}
                 onClick={() => this.setState({ activeCategory: 3 })}
               >
-                <img src={cat3_Icon}></img>
+                <img src={cat3_Icon} alt=""></img>
               </div>
             </div>
           </div>
