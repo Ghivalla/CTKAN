@@ -1,20 +1,26 @@
 .logo {
-    width: 100%;
-    max-width: 200px;
-    margin: 35px auto;
+  width: 100%;
+  max-width: 200px;
+  margin: 35px auto;
 }
 img {
-    width: 100%;
+  width: 100%;
 }
-button{
-    margin-bottom: 12px;
-    margin-top: 12px;
+.button {
+  margin-bottom: 12px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
 }
-.btn-secondary {
-    background: url('../../assets/google-icon.svg') transparent 25px 50% no-repeat;
+.button-google {
+  width: 230px;
+  margin: auto;
+}
+.button span {
+  color: black;
 }
 p {
-    text-align: center;
-    color: #2D7D9A;
-    text-decoration: none;
+  text-align: center;
+  color: #2d7d9a;
+  text-decoration: none;
 }
