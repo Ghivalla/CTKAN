@@ -6,12 +6,15 @@ import cat2_Icon from "../../assets/cat2.svg";
 import cat3_Icon from "../../assets/cat3.svg";
 import FormInput from "../../components/form-input/form-input-component.jsx";
 import Footer from "../../components/footer/footer-component";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class Ajouter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       activeCategory: 1,
+      datePeremtion: null,
     };
   }
   render() {
@@ -30,23 +33,34 @@ class Ajouter extends React.Component {
 
             <div className="icons_category">
               <div
-                className={this.state.activeCategory == 1 ? "active-icon" : ""} onClick={()=>this.setState({activeCategory : 1})}
+                className={this.state.activeCategory == 1 ? "active-icon" : ""}
+                onClick={() => this.setState({ activeCategory: 1 })}
               >
                 <img src={cat1_Icon}></img>
               </div>
               <div
-                className={this.state.activeCategory == 2 ? "active-icon" : ""} onClick={()=>this.setState({activeCategory : 2})}
+                className={this.state.activeCategory == 2 ? "active-icon" : ""}
+                onClick={() => this.setState({ activeCategory: 2 })}
               >
                 <img src={cat2_Icon}></img>
               </div>
-              <div className={this.state.activeCategory == 3 ?"active-icon" : ""} onClick={()=>this.setState({activeCategory : 3})}>
-                <img src={cat3_Icon} ></img>
+              <div
+                className={this.state.activeCategory == 3 ? "active-icon" : ""}
+                onClick={() => this.setState({ activeCategory: 3 })}
+              >
+                <img src={cat3_Icon}></img>
               </div>
             </div>
           </div>
           <div className="peremption">
             <h2>Date de peremption:</h2>
           </div>
+          <DatePicker
+            contentStyle={{ width: "500px !important" }}
+            showPopperArrow={false}
+            selected={this.state.datePeremtion}
+            onChange={(date) => this.setState({ datePeremtion: date })}
+          />
           <div className="peremption-elements">
             <div>
               <input className="search" type="text" />
