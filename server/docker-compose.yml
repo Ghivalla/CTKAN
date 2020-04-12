@@ -11,7 +11,7 @@ services:
         links:
             - postgres
         ports:
-            - "3000:3000"
+            - "3001:3001"
         volumes: #allow acces to file system
             - ./:/usr/src/ctkan/server
 
