@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router } from "@reach/router";
+import { Router, navigate } from "@reach/router";
 import "./App.css";
 import Login from "./pages/login/login-page";
 import Inscription from "./pages/inscription/inscription-page";
@@ -9,38 +9,47 @@ import Trousse from "./pages/trousse/trousse-page";
 import Blog from "./pages/blog/blog-page";
 import Params from "./pages/params/params-page";
 
-
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
+    user: {
+      id: "",
       email: "",
-      password: "",
-    };
-  }
+      joined: "",
+    },
+    isLoggedIn: false,
+  };
 
-  handleInputChange = (event) => {
-    const target = event.target;
-    const email = target.email;
-    const password = target.password;
+  loadUser = (data) => {
     this.setState({
-      [email]: target.value,
-      [password]: target.value,
+      user: {
+        id: data.id,
+        email: data.email,
+        joined: data.joined,
+      },
+      isLoggedIn: true,
     });
+    navigate("/");
   };
 
   render() {
-    return (
-      <Router>
-        <Login path="/" />
-        <Inscription path="/inscription" />
-        <Scan path="/scan" />
-        <Ajouter path="/ajouter" />
-        <Trousse path="/trousse" />
-        <Blog path="/blog" />
-        <Params path="/params" />
-      </Router>
-    );
+    if (this.state.isLoggedIn) {
+      return (
+        <Router>
+          <Scan path="/" />
+          <Ajouter path="/ajouter" />
+          <Trousse path="/trousse" />
+          <Blog path="/blog" />
+          <Params path="/params" />
+        </Router>
+      );
+    } else {
+      return (
+        <Router>
+          <Login path="/" loadUser={this.loadUser} />
+          <Inscription path="/inscription" loadUser={this.loadUser} />
+        </Router>
+      );
+    }
   }
 }
 

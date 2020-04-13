@@ -9,18 +9,20 @@ import { GoogleLogin } from "react-google-login";
 const EMAIL_REGEXP = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 class Login extends Component {
-  state = {
-    email: "",
-    password: "",
-    emailError: "",
-    passwordError: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      loginError: "",
+    };
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
     const isValidEmail = EMAIL_REGEXP.test(email);
-    if (isValidEmail) {
+    if (isValidEmail && password.length >= 6) {
       fetch("https://api.ctkan.com/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -31,10 +33,15 @@ class Login extends Component {
       })
         .then((response) => response.json())
         .then((user) => {
-          if (user.id) {
-            console.log("ok");
+          const { id, email, joined } = user;
+          if (id && email) {
+            this.props.loadUser({ id, email, joined });
+          } else {
+            this.setState({ loginError: "Mail ou mot de passe invalide" });
           }
         });
+    } else {
+      this.setState({ loginError: "Format de mail ou mot de passe invalide" });
     }
   };
 
@@ -43,7 +50,7 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password, passwordError, emailError } = this.state;
+    const { email, password, loginError } = this.state;
     return (
       <section className="App">
         <div className="logo">
@@ -55,7 +62,6 @@ class Login extends Component {
             value={email}
             type="email"
             handleChange={(e) => this.setState({ email: e.target.value })}
-            error={emailError}
             className="input"
             autoComplete="username"
           />
@@ -64,10 +70,10 @@ class Login extends Component {
             value={password}
             type="password"
             handleChange={(e) => this.setState({ password: e.target.value })}
-            error={passwordError}
             className="input"
             autoComplete="current-password"
           />
+          <p className="error">{loginError}</p>
           <FormInput
             value="Se connecter"
             type="submit"

@@ -8,13 +8,16 @@ import Logo from "../../assets/logo-home-Page.svg";
 const EMAIL_REGEXP = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 class Inscriptions extends Component {
-  state = {
-    email: "",
-    password: "",
-    confirmPassword: "",
-    emailError: "",
-    passwordError: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      confirmPassword: "",
+      emailError: "",
+      passwordError: "",
+    };
+  }
 
   validate = () => {
     const { confirmPassword, password, email } = this.state;
@@ -58,7 +61,10 @@ class Inscriptions extends Component {
       })
         .then((response) => response.json())
         .then((user) => {
-          console.log(user);
+          const { id, email, joined } = user;
+          if (id && email) {
+            this.props.loadUser({ id, email, joined });
+          }
         });
     } else {
       console.log("unable to register");
