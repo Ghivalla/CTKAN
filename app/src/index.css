@@ -5,3 +5,9 @@ body {
     sans-serif;
     font-size: 16px;
 }
+button, input[type="submit"] {
+	-webkit-appearance: none;
+	border-radius: 0;
+	appearance: none;
+  	border: none;
+}
