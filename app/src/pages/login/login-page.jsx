@@ -18,12 +18,16 @@ class Login extends Component {
     };
   }
 
+  saveAuthTokenSession = (token) => {
+    window.sessionStorage.setItem("token", token);
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
     const isValidEmail = EMAIL_REGEXP.test(email);
     if (isValidEmail && password.length >= 6) {
-      fetch("https://api.ctkan.com/signin", {
+      fetch(`${process.env.REACT_APP_API_URL}/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -32,10 +36,23 @@ class Login extends Component {
         }),
       })
         .then((response) => response.json())
-        .then((user) => {
-          const { id, email, joined } = user;
-          if (id && email) {
-            this.props.loadUser({ id, email, joined });
+        .then((data) => {
+          if (data.userId && data.success === "true") {
+            this.saveAuthTokenSession(data.token);
+            fetch(`${process.env.REACT_APP_API_URL}/profile/${data.userId}`, {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: data.token,
+              },
+            })
+              .then((res) => res.json())
+              .then((user) => {
+                if (user && user.email) {
+                  this.props.loadUser(user);
+                }
+              })
+              .catch(console.log);
           } else {
             this.setState({ loginError: "Mail ou mot de passe invalide" });
           }

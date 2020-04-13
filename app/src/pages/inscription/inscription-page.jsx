@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import "./inscription-page.css";
 import FormInput from "../../components/form-input/form-input-component.jsx";
 import Logo from "../../assets/logo-home-Page.svg";
@@ -51,7 +51,7 @@ class Inscriptions extends Component {
     event.preventDefault();
     const isValid = this.validate();
     if (isValid) {
-      fetch("https://api.ctkan.com/register", {
+      fetch(`${process.env.REACT_APP_API_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -60,11 +60,8 @@ class Inscriptions extends Component {
         }),
       })
         .then((response) => response.json())
-        .then((user) => {
-          const { id, email, joined } = user;
-          if (id && email) {
-            this.props.loadUser({ id, email, joined });
-          }
+        .then((data) => {
+          console.log(data);
         });
     } else {
       console.log("unable to register");

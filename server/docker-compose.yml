@@ -8,6 +8,7 @@ services:
         command: npm start
         environment:
             POSTGRES_URI: postgres://db-ctkan:secret@postgres:5432/CTKAN
+            REDIS_URI: redis://redis:6379
         ports:
             - "3001:3001"
         volumes: #allow acces to file system
@@ -22,3 +23,8 @@ services:
         build: ./postgres
         ports:
             - "5432:5432"
+    
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"

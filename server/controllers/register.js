@@ -1,6 +1,6 @@
 const handleRegister = (req, res, db, bcrypt, saltRounds) => {
-    const { email, name, password } = req.body;
-    if(!email, !name, !password) {
+    const { email, password } = req.body;
+    if(!email, !password) {
        return res.status(400).json('unable to register')
     }
     const hash = bcrypt.hashSync(password,saltRounds);
@@ -18,7 +18,6 @@ const handleRegister = (req, res, db, bcrypt, saltRounds) => {
         }).then(trx.commit).catch(trx.rollback)
     })
     .catch((err) => {
-        console.log(err)
         res.status(400).json('unable to register')
     })
 };
