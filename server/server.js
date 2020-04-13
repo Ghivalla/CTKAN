@@ -6,6 +6,7 @@ const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
 const morgan = require('morgan');
+const auth = require('./controllers/authorization');
 require('dotenv').config({path:'./.env'});
 
 const saltRounds = 10;
@@ -19,7 +20,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('combined'));
 
-app.get('/profile/:id', (req,res) => { profile.handleProfileGet(req, res, db) });
+app.get('/profile/:id', auth.requireAuth, (req,res) => { profile.handleProfileGet(req, res, db) });
 app.post('/signin', (req,res) => { signin.signInAuthentication(req, res, db, bcrypt) });
 app.post('/register', (req,res) => { register.handleRegister(req, res, db, bcrypt, saltRounds) });
 
