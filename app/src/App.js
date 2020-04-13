@@ -18,38 +18,72 @@ class App extends Component {
     },
     isLoggedIn: false,
   };
-  componentDidMount() {
+
+  async componentDidMount() {
     const token = window.sessionStorage.getItem("token");
+    const googleToken = window.sessionStorage.getItem("g-token");
+    if (token && !this.state.isLoggedIn) {
+      const { userId } = await this.getSession({ token });
+      const userProfile = await this.getUserProfile({ userId, token });
+      this.loadUserData(userProfile);
+    }
+    if (googleToken && !this.state.isLoggedIn) {
+      const { user_id, email } = await fetch(
+        `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${googleToken}`
+      );
+      if (user_id) {
+        const joined = new Date();
+        this.loadUserData({ id: user_id, email, joined });
+      } else {
+        console.log("token invalide");
+      }
+    }
+  }
+
+  authUser = async ({ email, password }) => {
+    const { userId, token } = await this.getSession({ email, password });
+    this.saveAuthTokenSession(token);
+    const userProfile = await this.getUserProfile({ userId, token });
+    this.loadUserData(userProfile);
+  };
+
+  saveAuthTokenSession = (token) => {
+    window.sessionStorage.setItem("token", token);
+  };
+
+  getSession = async ({ email, password, token }) => {
+    const sessionHeader = new Headers({ "Content-Type": "application/json" });
     if (token) {
-      fetch(`${process.env.REACT_APP_API_URL}/signin`, {
-        method: "POST",
+      sessionHeader.append("Authorization", token);
+    }
+    const getSession = await fetch(`${process.env.REACT_APP_API_URL}/signin`, {
+      method: "POST",
+      headers: sessionHeader,
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    const session = await getSession.json();
+    return session;
+  };
+
+  getUserProfile = async ({ userId, token }) => {
+    const getUserProfile = await fetch(
+      `${process.env.REACT_APP_API_URL}/profile/${userId}`,
+      {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
         },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data && data.id) {
-            fetch(`${process.env.REACT_APP_API_URL}/profile/${data.id}`, {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: token,
-              },
-            })
-              .then((res) => res.json())
-              .then((user) => {
-                if (user && user.email) {
-                  this.loadUser(user);
-                }
-              });
-          }
-        })
-        .catch(console.log);
-    }
-  }
-  loadUser = ({ id, email, joined }) => {
+      }
+    );
+    const userProfile = await getUserProfile.json();
+    return userProfile;
+  };
+
+  loadUserData = ({ id, email, joined }) => {
     this.setState({
       user: {
         id,
@@ -61,24 +95,24 @@ class App extends Component {
   };
 
   render() {
-    if (this.state.isLoggedIn) {
-      return (
-        <Router>
-          <Scan path="/" />
-          <Ajouter path="/ajouter" />
-          <Trousse path="/trousse" />
-          <Blog path="/blog" />
-          <Params path="/params" />
-        </Router>
-      );
-    } else {
-      return (
-        <Router>
-          <Login path="/" loadUser={this.loadUser} />
-          <Inscription path="/inscription" loadUser={this.loadUser} />
-        </Router>
-      );
-    }
+    return this.state.isLoggedIn ? (
+      <Router>
+        <Scan path="/" />
+        <Ajouter path="/ajouter" />
+        <Trousse path="/trousse" />
+        <Blog path="/blog" />
+        <Params path="/params" />
+      </Router>
+    ) : (
+      <Router>
+        <Login
+          path="/"
+          authUser={this.authUser}
+          loadUserData={this.loadUserData}
+        />
+        <Inscription path="/inscription" loadUserData={this.loadUserData} />
+      </Router>
+    );
   }
 }
 

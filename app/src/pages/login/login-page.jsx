@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import FormInput from "../../components/form-input/form-input-component.jsx";
 import "./login-page.css";
 import Logo from "../../assets/logo-home-Page.svg";
@@ -18,52 +18,19 @@ class Login extends Component {
     };
   }
 
-  saveAuthTokenSession = (token) => {
-    window.sessionStorage.setItem("token", token);
-  };
-
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
     const isValidEmail = EMAIL_REGEXP.test(email);
     if (isValidEmail && password.length >= 6) {
-      fetch(`${process.env.REACT_APP_API_URL}/signin`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.userId && data.success === "true") {
-            this.saveAuthTokenSession(data.token);
-            fetch(`${process.env.REACT_APP_API_URL}/profile/${data.userId}`, {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: data.token,
-              },
-            })
-              .then((res) => res.json())
-              .then((user) => {
-                if (user && user.email) {
-                  this.props.loadUser(user);
-                }
-              })
-              .catch(console.log);
-          } else {
-            this.setState({ loginError: "Mail ou mot de passe invalide" });
-          }
-        });
-    } else {
-      this.setState({ loginError: "Format de mail ou mot de passe invalide" });
+      this.props.authUser({ email, password });
     }
   };
 
   responseGoogle = (response) => {
-    console.log(response);
+    const token = response.tc.access_token;
+    window.sessionStorage.setItem("g-token", token);
+    navigate("/");
   };
 
   render() {

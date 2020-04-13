@@ -1,3 +1,15 @@
+const redisClient = require('./signin').redisClient;
+const jwt = require('jsonwebtoken');
+
+const signToken = (email) => {
+    const jwtPaylod = { email };
+    return jwt.sign(jwtPaylod, 'JWT_SECRET', {expiresIn: '2 days'});
+}
+
+const setToken = (key, value) => {
+    return Promise.resolve(redisClient.set(key,value))
+}
+
 const handleRegister = (req, res, db, bcrypt, saltRounds) => {
     const { email, password } = req.body;
     if(!email, !password) {
@@ -13,7 +25,9 @@ const handleRegister = (req, res, db, bcrypt, saltRounds) => {
                 email : loginEmail[0],
                 joined: new Date()
             }).then(user => {
-                res.json(user[0]);
+                const {email, id, joined } = user[0];
+                const token = signToken(email);
+                setToken(token, id).then(()=>(res.json({ email, id, joined, token })))
             })
         }).then(trx.commit).catch(trx.rollback)
     })

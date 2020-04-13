@@ -19,8 +19,7 @@ class Inscriptions extends Component {
     };
   }
 
-  validate = () => {
-    const { confirmPassword, password, email } = this.state;
+  validate = ({ confirmPassword, password, email }) => {
     const isEmailValid = EMAIL_REGEXP.test(email) ? true : false;
     const identiquePassWord = confirmPassword === password;
     const gotRequiredPassWordLength = password.length >= 6;
@@ -47,25 +46,34 @@ class Inscriptions extends Component {
     }
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    const isValid = this.validate();
+    const { confirmPassword, password, email } = this.state;
+    const isValid = this.validate({ confirmPassword, password, email });
     if (isValid) {
-      fetch(`${process.env.REACT_APP_API_URL}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
+      const userData = await this.registerUser(email, password);
+      if (userData.id) {
+        window.sessionStorage.setItem("token", userData.token);
+        this.props.loadUserData({
+          email: userData.email,
+          id: userData.id,
+          joined: userData.joined,
         });
+        navigate("/");
+      }
     } else {
       console.log("unable to register");
     }
+  };
+
+  registerUser = async (email, password) => {
+    const setUser = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const userData = await setUser.json();
+    return userData;
   };
 
   render() {

@@ -28,7 +28,7 @@ const getAuthTokenId = (req, res) => {
         if(err || !reply){
             return res.status(401).send('Unauthorized');
         }
-        return res.json({id: reply})
+        return res.json({userId: reply})
     });
 };
 
@@ -56,7 +56,7 @@ const createSessions = (user) => {
 
 const signInAuthentication = (req, res, db, bcrypt) => {
     const { authorization } = req.headers;
-    return authorization ?
+    return authorization  ?
         getAuthTokenId(req, res) :
         handleSignin(req, db, bcrypt)
         .then(data=>{
