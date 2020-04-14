@@ -5,17 +5,15 @@ jobs:
             - image: circleci/node:12.16.1
         steps:
             - checkout
-            - run: cd ./app
-            - run: npm install
-            - run: npm run build
+            - run: 
+                command: cd ./app && npm install && npm run build
     server:
         docker:
             - image: circleci/node:12.16.1
         steps:
             - checkout
-            - run: cd ./server
-            - run: npm install
-            - run: npm run start
+            - run: 
+                command: cd ./server && npm install && npm run start
 workflows:
     version: 2
     build_test:
