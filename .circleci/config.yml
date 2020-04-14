@@ -5,15 +5,30 @@ jobs:
             - image: circleci/node:12.16.1
         steps:
             - checkout
-            - run: 
+            - run:
+                name: Build the front-end app
                 command: cd ./app && npm install && npm run build
     server:
         docker:
             - image: circleci/node:12.16.1
         steps:
             - checkout
-            - run: 
-                command: cd ./server && npm install && npm run start
+            - run:
+                name: Install Docker Compose
+                command: |
+                  set -x
+                  cd ./server
+                  curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+                  chmod +x /usr/local/bin/docker-compose
+            - run:
+                name: Build service
+                command: make
+      
+            - run:
+                name: Start container and verify it's working
+                command: |
+                  set -x
+                  docker-compose up -d
 workflows:
     version: 2
     build_test:
