@@ -5,7 +5,7 @@ jobs:
             - image: circleci/node:12.16.1
         steps:
             - checkout
-            - run: cd app
+            - run: cd ./app
             - run: npm install
             - run: npm run build
     server:
@@ -13,7 +13,7 @@ jobs:
             - image: circleci/node:12.16.1
         steps:
             - checkout
-            - run: cd server
+            - run: cd ./server
             - run: npm install
             - run: npm run start
 workflows:
