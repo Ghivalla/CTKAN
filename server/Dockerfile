@@ -1,6 +1,6 @@
 FROM node:lts-stretch
 
-WORKDIR /usr/src/ctkan/server
+WORKDIR /home/app
 
 COPY ./ ./
 
