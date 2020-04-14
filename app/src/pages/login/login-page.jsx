@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import FormInput from "../../components/form-input/form-input-component.jsx";
 import "./login-page.css";
 import Logo from "../../assets/logo-home-Page.svg";
@@ -9,41 +9,32 @@ import { GoogleLogin } from "react-google-login";
 const EMAIL_REGEXP = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 class Login extends Component {
-  state = {
-    email: "",
-    password: "",
-    emailError: "",
-    passwordError: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      loginError: "",
+    };
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
     const isValidEmail = EMAIL_REGEXP.test(email);
-    if (isValidEmail) {
-      fetch("https://api.ctkan.com/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      })
-        .then((response) => response.json())
-        .then((user) => {
-          if (user.id) {
-            console.log("ok");
-          }
-        });
+    if (isValidEmail && password.length >= 6) {
+      this.props.authUser({ email, password });
     }
   };
 
   responseGoogle = (response) => {
-    console.log(response);
+    const token = response.tc.access_token;
+    window.sessionStorage.setItem("g-token", token);
+    navigate("/");
   };
 
   render() {
-    const { email, password, passwordError, emailError } = this.state;
+    const { email, password, loginError } = this.state;
     return (
       <section className="App">
         <div className="logo">
@@ -55,7 +46,6 @@ class Login extends Component {
             value={email}
             type="email"
             handleChange={(e) => this.setState({ email: e.target.value })}
-            error={emailError}
             className="input"
             autoComplete="username"
           />
@@ -64,10 +54,10 @@ class Login extends Component {
             value={password}
             type="password"
             handleChange={(e) => this.setState({ password: e.target.value })}
-            error={passwordError}
             className="input"
             autoComplete="current-password"
           />
+          <p className="error">{loginError}</p>
           <FormInput
             value="Se connecter"
             type="submit"

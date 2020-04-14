@@ -24,3 +24,9 @@ p {
   color: #2d7d9a;
   text-decoration: none;
 }
+
+p.error {
+  color: red;
+  font-size: 12;
+  margin-top: 0;
+}

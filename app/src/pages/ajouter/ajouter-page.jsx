@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./ajouter-page.css";
 import cat1_Icon from "../../assets/cat1.svg";
 import cat2_Icon from "../../assets/cat2.svg";
