@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+    ctkan-app:
+        container_name: ctkan-frontend
+        working_dir: /home/app
+        build: ./app
+        command: npm start
+        env_file:
+            - ./app/.env
+        ports:
+            - "3000:3000"
+        stdin_open: true
+        volumes:
+            - ./app:/home/app
+
+    ctkan-api:
+        container_name: ctkan-server
+        working_dir: /home/app
+        build: ./server
+        command: npm start
+        environment:
+            POSTGRES_URI: postgres://db-ctkan:secret@postgres:5432/CTKAN
+            REDIS_URI: redis://redis:6379
+        ports:
+            - "3001:3001"
+        volumes:
+            - ./server:/home/app
+
+    postgres:
+        environment:
+            POSTGRES_USER: db-ctkan
+            POSTGRES_PASSWORD: secret
+            POSTGRES_DB: CTKAN
+            POSTGRES_HOST: postgres
+        build: ./server/postgres
+        ports:
+            - "5432:5432"
+    
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"
