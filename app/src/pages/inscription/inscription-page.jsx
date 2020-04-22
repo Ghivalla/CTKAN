@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, navigate } from "@reach/router";
 import "./inscription-page.css";
 import FormInput from "../../components/form-input/form-input-component.jsx";
-import Logo from "../../assets/logo-home-Page.svg";
+import Logo from "../../assets/logo-home-page.svg";
 
 // eslint-disable-next-line
 const EMAIL_REGEXP = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
