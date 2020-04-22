@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, navigate } from "@reach/router";
 import FormInput from "../../components/form-input/form-input-component.jsx";
 import "./login-page.css";
-import Logo from "../../assets/logo-home-Page.svg";
+import Logo from "../../assets/logo-home-page.svg";
 import { GoogleLogin } from "react-google-login";
 
 // eslint-disable-next-line
