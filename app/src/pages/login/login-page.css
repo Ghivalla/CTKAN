@@ -13,16 +13,25 @@ img {
   justify-content: center;
 }
 .button-google {
-  width: 230px;
   margin: auto;
+  border: 1px solid #ff9900;
 }
 .button span {
   color: black;
+  margin: auto;
+  padding-right: 48px;
 }
 p {
   text-align: center;
   color: #2d7d9a;
   text-decoration: none;
+}
+.register-link {
+  text-decoration: none;
+}
+.register-link p {
+  color: #ff9900;
+  margin-bottom: 62px;
 }
 
 p.error {

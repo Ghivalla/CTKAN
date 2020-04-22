@@ -23,10 +23,11 @@ button:hover,
   cursor: pointer;
 }
 
-.btn-primary {
-  background-color: #2d7d9a;
-  color: white;
+.btn-primary,
+input[type="submit"].btn-primary {
+  background-color: #ff9900;
   border-radius: 4px;
+  color: white;
 }
 .btn-secondary {
   background-color: transparent;

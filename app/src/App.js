@@ -110,7 +110,7 @@ class App extends Component {
           authUser={this.authUser}
           loadUserData={this.loadUserData}
         />
-        <Inscription path="/inscription" loadUserData={this.loadUserData} />
+        {/* <Inscription path="/inscription" loadUserData={this.loadUserData} /> */}
       </Router>
     );
   }

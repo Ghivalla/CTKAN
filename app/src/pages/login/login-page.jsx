@@ -28,9 +28,7 @@ class Login extends Component {
   };
 
   responseGoogle = (response) => {
-    const token = response.tc.access_token;
-    window.sessionStorage.setItem("g-token", token);
-    navigate("/");
+    console.log("It's closed maggle !");
   };
 
   render() {
@@ -76,8 +74,8 @@ class Login extends Component {
             <span> Continuer avec google</span>
           </GoogleLogin>
         </div>
-        <Link to="inscription">
-          <p className="register-link">Tu n'as pas de compte ?</p>
+        <Link to="/" className="register-link">
+          <p>Tu n'as pas de compte ?</p>
         </Link>
       </section>
     );
